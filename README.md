@@ -1,14 +1,19 @@
 # ShoreChallenge
 
-To start your Phoenix server:
+## TODO:
+- ~scaffold prject~
+- ~implement core logic~
+- write unit tests
+- implement API
+- write api tests
+- documentation (maybe use swagger?)
+- clean-up
 
+## Installation
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
   * Start Phoenix endpoint with `mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
 ## Learn more
 
