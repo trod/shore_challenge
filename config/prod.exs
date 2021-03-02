@@ -23,7 +23,7 @@ database_url =
     For example: ecto://USER:PASS@HOST/DATABASE
     """
 
-config :shore_challenge, ShoreChallenge.Repo,
+config :shore_challenge, ShoreChallenge.Db,
   # ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")

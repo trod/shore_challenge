@@ -8,7 +8,7 @@
 use Mix.Config
 
 config :shore_challenge,
-  ecto_repos: [ShoreChallenge.Repo]
+  ecto_repos: [ShoreChallenge.Db]
 
 # Configures the endpoint
 config :shore_challenge, ShoreChallengeWeb.Endpoint,

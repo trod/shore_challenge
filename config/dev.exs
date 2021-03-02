@@ -1,7 +1,7 @@
 use Mix.Config
 
 # Configure your database
-config :shore_challenge, ShoreChallenge.Repo,
+config :shore_challenge, ShoreChallenge.Db,
   username: "postgres",
   password: "postgres",
   database: "shore_challenge_dev",
