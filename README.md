@@ -38,7 +38,7 @@ Below you can find my notes which I made during the development. Also I want to 
 
 ## Installation
   * Install dependencies with `mix deps.get`
-  * Start Phoenix endpoint with `mix phx.server`
+  * Start API endpoints with `mix phx.server`
   
 ## Tests
  Run tests with `mix test`
