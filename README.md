@@ -1,7 +1,7 @@
 # ShoreChallenge
 
 ## Disclaimer:
-I have never played in ten-pin bowling, so there can be a slightly difference in the actual and implemented game rules.
+I have never played in ten-pin bowling, so there can be a slight difference in the actual and implemented game rules.
 
 The way it is implented:
 ```
