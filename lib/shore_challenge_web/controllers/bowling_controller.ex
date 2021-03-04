@@ -6,6 +6,10 @@ defmodule ShoreChallengeWeb.BowlingController do
 
   import Plug.Conn
 
+  # TODO: refactoring here is required:
+  # - implement Fallback controller
+  # - more ideomatic (plug like) conn transformation
+
   def new(%Plug.Conn{} = conn, _params) do
     {:ok, pid} = ShoreChallenge.Bowling.start_link([])
 
@@ -16,11 +20,17 @@ defmodule ShoreChallengeWeb.BowlingController do
   end
 
   def score(%Plug.Conn{} = conn, %{"game_id" => game_id}) do
-    pid = GamePool.get(game_id)
-    score = Bowling.score(pid)
+    case GamePool.get(game_id) do
+      nil ->
+        conn
+        |> send_resp(404, "Game #{game_id} not found")
 
-    conn
-    |> send_resp(200, "#{score}")
+      pid ->
+        score = Bowling.score(pid)
+
+        conn
+        |> send_resp(200, "#{score}")
+    end
   end
 
   def score(%Plug.Conn{} = conn, _params) do
@@ -29,13 +39,22 @@ defmodule ShoreChallengeWeb.BowlingController do
   end
 
   def roll(%Plug.Conn{} = conn, %{"game_id" => game_id, "score" => score}) do
-    pid = GamePool.get(game_id)
-    Bowling.add_roll(pid, String.to_integer(score))
+    case GamePool.get(game_id) do
+      nil ->
+        conn
+        |> send_resp(404, "Game #{game_id} not found")
 
-    score = Bowling.score(pid)
+      pid ->
+        case Bowling.add_roll(pid, String.to_integer(score)) do
+          {:error, msg} ->
+            conn
+            |> send_resp(400, msg)
 
-    conn
-    |> send_resp(200, "#{score}")
+          _ ->
+            conn
+            |> send_resp(200, Bowling.score(pid) |> Integer.to_string())
+        end
+    end
   end
 
   def roll(%Plug.Conn{} = conn, _params) do

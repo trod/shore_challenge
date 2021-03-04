@@ -5,8 +5,7 @@ use Mix.Config
 config :shore_challenge, ShoreChallengeWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "sc5iuycNVQf5VRsPKixr4XB0JOdD/AHA80gSbsICqXCFG7BlMXPkN9/8nJH+4v+a",
-  render_errors: [view: ShoreChallengeWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: ShoreChallenge.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: ShoreChallengeWeb.ErrorView, accepts: ~w(json)]
 
 # Configures Elixir's Logger
 config :logger, :console,
