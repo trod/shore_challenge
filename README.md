@@ -1,7 +1,7 @@
 # ShoreChallenge
 
 ## Comments:
-In this challange I decided to try something new and implemented a simple in-memory ets storage for bowling games. Every game runs in its own proccess and completely isolated from others. Biggest and natural disadvantage of that approach is that all the games are lost in case of server restart/crash.
+In this challenge I decided to try something new and implemented a simple in-memory ets storage for bowling games. Every game runs in its own proccess and completely isolated from others. Biggest and natural disadvantage of that approach is that all the games are lost in case of server restart/crash.
 Below you can find my notes notes which I made during the development. Also I want to list some parts I would like to add if I'd have more time:
 
 - Implement proper error templating
