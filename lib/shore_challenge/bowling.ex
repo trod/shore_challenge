@@ -3,12 +3,16 @@ defmodule ShoreChallenge.Bowling do
   Internal Bowling game API.
   """
 
+  # TODO: Consider to refactor core logic: Maybe use GenStateMachine:any()
+  # https://hexdocs.pm/gen_state_machine/GenStateMachine.html
+
   alias ShoreChallenge.Game
   alias ShoreChallenge.Game.{Frame, Spare, Strike}
 
   alias ShoreChallenge.GamePool
 
   use GenServer
+
   # Client
   def start_link(opts \\ []) do
     GenServer.start_link(__MODULE__, :ok, opts)
@@ -29,6 +33,8 @@ defmodule ShoreChallenge.Bowling do
   # callbacks
   @impl true
   def init(:ok) do
+    # TODO: That's definitely an overkill to keep ecto only for uuid generation.
+    # Need to find similar but lightweight solution
     game_uuid = Ecto.UUID.generate()
     true = GamePool.put(self(), game_uuid)
     true = GamePool.put(game_uuid, self())
@@ -66,10 +72,6 @@ defmodule ShoreChallenge.Bowling do
 
   defp roll(_game, roll) when roll > 10 do
     {:error, "Pin count exceeds pins on the lane"}
-  end
-
-  defp roll(%Game{finished: true}, _roll) do
-    {:error, "This game is finished"}
   end
 
   defp roll(%Game{strike: nil, spare: nil, throw: 2, score: score}, roll)
@@ -161,7 +163,7 @@ defmodule ShoreChallenge.Bowling do
        ) do
     final_score = 10 + roll
 
-    %{game | frames: [%Frame{score: final_score} | frames], throw: 1, spare: nil}
+    %{game | frames: [%Frame{score: final_score} | frames], throw: 1, score: 0, spare: nil}
   end
 
   # first throw
@@ -171,7 +173,7 @@ defmodule ShoreChallenge.Bowling do
 
   #  second throw
   defp do_roll(%Game{frames: frames, throw: 2, score: score} = game, roll) do
-    %{game | frames: [%Frame{score: score + roll} | frames], throw: 1}
+    %{game | frames: [%Frame{score: score + roll} | frames], score: 0, throw: 1}
   end
 
   defp maybe_set_finished(%Game{frames: frames} = game) do
