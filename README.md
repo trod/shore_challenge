@@ -18,6 +18,7 @@ Below you can find my notes which I made during the development. Also I want to 
 - Switch to json request/response as it's more flexible than plain params.
 - Add proper API documentation: https://swagger.io/tools/swagger-ui/ is just great.
 - Add telemetry: https://www.jaegertracing.io/
+- Add authentication.
 - I'd like to completely refactor controller (see todos in there).
 - Better logging.
 - Implement persistent storage and use ets as a cache
