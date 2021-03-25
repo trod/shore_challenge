@@ -1,4 +1,4 @@
-# ShoreChallenge
+# Bowling game
 
 ## Disclaimer:
 I have never played ten-pin bowling, so there can be a slight difference in the actual and implemented game rules.
